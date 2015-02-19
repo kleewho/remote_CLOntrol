@@ -20,10 +20,10 @@
          :init remote-booking.core.handler/init}
   :lis-opts
   {:pid-dir "/var/local/run"
-   :install-dir "/var/local/clogrid"
+   :install-dir "/var/local/remote_booking"
    :init-script-install-dir "/etc/init.d"
-   :jar-install-dir "/var/local/clogrid"
-   :redirect-output-to "/var/local/clogrid/log"
+   :jar-install-dir "/var/local/remote_booking"
+   :redirect-output-to "/var/local/remote_booking/log"
    :jar-args ["-p" "8080"]
    :jvm-opts ["-server"
               "-Xms256M"
