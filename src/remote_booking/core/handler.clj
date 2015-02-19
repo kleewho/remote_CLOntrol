@@ -11,7 +11,8 @@
 (defroutes app-routes
 
   (PUT "/:region/:user/booking" [region user :as request]
-       (json/write-str (str (booking/send (-> request :params :stb-type)) (-> request :params :stb-type))))
+       (json/write-str (str (booking/send-booking (-> request :params :stb-type))
+                            (-> request :params :stb-type))))
   (route/not-found "Not Found"))
 
 (defn init []
