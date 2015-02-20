@@ -1,10 +1,10 @@
-(ns remote-booking.core.handler
+(ns remote-clontrol.core.handler
   (:require [compojure.core :refer :all]
             [compojure.route :as route]
             [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
             [metrics.ring.expose :refer [expose-metrics-as-json]]
             [metrics.ring.instrument :refer [instrument]]
-            [remote-booking.core.booking :as booking]
+            [remote-clontrol.core.booking :as booking]
             [clojure.data.json :as json]
             [clojure.tools.logging :as log]))
 

@@ -1,4 +1,4 @@
-(ns remote-booking.core.booking)
+(ns remote-clontrol.core.booking)
 
 (defn stb-type [type _] type)
 

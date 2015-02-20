@@ -1,4 +1,4 @@
-(defproject remote-booking "0.1.0-SNAPSHOT"
+(defproject remote-clontrol "0.1.0-SNAPSHOT"
   :description "microservice for making bookings"
   :min-lein-version "2.0.0"
   :dependencies [[org.clojure/clojure "1.6.0"]
@@ -16,14 +16,14 @@
                  [ch.qos.logback/logback-classic "1.1.1"]
                  [net.logstash.logback/logstash-logback-encoder "3.6"]]
   :plugins [[lein-ring "0.9.1"]]
-  :ring {:handler remote-booking.core.handler/app
-         :init remote-booking.core.handler/init}
+  :ring {:handler remote-clontrol.core.handler/app
+         :init remote-clontrol.core.handler/init}
   :lis-opts
   {:pid-dir "/var/local/run"
-   :install-dir "/var/local/remote_booking"
+   :install-dir "/var/local/remote_clontrol"
    :init-script-install-dir "/etc/init.d"
-   :jar-install-dir "/var/local/remote_booking"
-   :redirect-output-to "/var/local/remote_booking/log"
+   :jar-install-dir "/var/local/remote_clontrol"
+   :redirect-output-to "/var/local/remote_clontrol/log"
    :jar-args ["-p" "8080"]
    :jvm-opts ["-server"
               "-Xms256M"
