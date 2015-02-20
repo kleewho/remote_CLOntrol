@@ -5,15 +5,16 @@
             [metrics.ring.expose :refer [expose-metrics-as-json]]
             [metrics.ring.instrument :refer [instrument]]
             [remote-clontrol.core.booking :as booking]
+            [remote-clontrol.core.stb-type :refer [wrap-stb-type]]
             [clojure.data.json :as json]
             [clojure.tools.logging :as log]))
 
 (defroutes app-routes
-
-  (PUT "/:region/:user/booking" [region user :as request]
-       (json/write-str (str (booking/send-booking (-> request :params :stb-type))
-                            (-> request :params :stb-type))))
-  (route/not-found "Not Found"))
+  (PUT "/:user/booking.json" [user :as request]
+       (json/write-str (booking/send-booking
+                        (-> request :stb)
+                        "dupa")))
+  (route/not-found "Not Found jebaka"))
 
 (defn init []
   (log/info "
@@ -25,6 +26,7 @@ The authors wish you happy hacking. Wax on, wax off
   (def app
     (->
      (routes app-routes)
+     (wrap-stb-type)
      (wrap-defaults api-defaults)
      (expose-metrics-as-json)
      (instrument))))
