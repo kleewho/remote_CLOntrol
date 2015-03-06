@@ -10,10 +10,13 @@
             [clojure.tools.logging :as log]))
 
 (defroutes app-routes
-  (PUT "/:user/booking.json" [user :as request]
-       (json/write-str (booking/send-booking
-                        (-> request :stb)
-                        "dupa")))
+
+  (PUT "/:region/:user/booking.json" [region user :as request]
+    (json/write-str (booking/send-booking
+                     {:region (-> region clojure.string/upper-case keyword)
+                      :user user
+                      :stb-type (:stb request)})))
+
   (route/not-found "Not Found jebaka"))
 
 (defn init []

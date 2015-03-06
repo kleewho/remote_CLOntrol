@@ -14,7 +14,8 @@
                  [org.clojure/algo.monads "0.1.5"]
                  [org.clojure/tools.logging "0.3.1"]
                  [ch.qos.logback/logback-classic "1.1.1"]
-                 [net.logstash.logback/logstash-logback-encoder "3.6"]]
+                 [net.logstash.logback/logstash-logback-encoder "3.6"]
+                 [com.lgi.traxis/traxis-client "2.2.1"]]
   :plugins [[lein-ring "0.9.1"]]
   :ring {:handler remote-clontrol.core.handler/app
          :init remote-clontrol.core.handler/init}
