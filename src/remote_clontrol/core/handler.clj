@@ -11,10 +11,10 @@
 
 (defroutes app-routes
 
-  (PUT "/:region/:user/booking.json" [region user :as request]
+  (PUT "/:region/:customer/booking.json" [region customer :as request]
     (json/write-str (booking/send-booking
                      {:region (-> region clojure.string/upper-case keyword)
-                      :user user
+                      :customer customer
                       :stb-type (:stb request)})))
 
   (route/not-found "Not Found jebaka"))
