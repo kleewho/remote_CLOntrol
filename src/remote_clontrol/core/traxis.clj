@@ -14,8 +14,9 @@
 
 (defn send [{:keys [region customer crid imi]}]
   (let [identity (RecordableIdentity/customerId customer)
-        resource (RecordableResource/eventByCridAndImi crid imi)]
+        resource (RecordableResource/eventByCridAndImi crid imi)
+        traxis-client (region traxis-clients)]
     (try
-      (.sendBookingRequest (region traxis-clients) identity resource))
+      (.sendBookingRequest traxis-client identity resource))
     (catch TraxisException e
       (handle e))))
