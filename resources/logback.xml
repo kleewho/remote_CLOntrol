@@ -1,0 +1,36 @@
+<configuration debug="false">
+ <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %-10contextName %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+    <file>test.log</file>
+    <append>true</append>
+    <!-- encoders are assigned the type
+         ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+    <encoder>
+      <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="STASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    <!-- remoteHost and port are optional (default values shown) -->
+    <remoteHost>127.0.0.1</remoteHost>
+    <port>4560</port>
+
+    <!-- encoder is required -->
+    <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
+  </appender>
+
+
+  <logger name="clojure-example-logback-integration" level="DEBUG"/>
+  <logger name="com.codahale.metrics" level="OFF" />
+
+  <root level="INFO">
+    <appender-ref ref="CONSOLE"/>
+    <appender-ref ref="FILE"/>
+    <appender-ref ref="STASH"/>
+  </root>
+</configuration>
