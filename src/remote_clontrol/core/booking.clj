@@ -10,10 +10,10 @@
 (defmulti send-booking stb-type)
 
 (defmethod send-booking :d4a [a]
-  (mds/send-d4a a))
+  (mds/send-mds a))
 
 (defmethod send-booking :hzn [a]
-  (mds/send-hzn a))
+  (mds/send-mds a))
 
 (defmethod send-booking :dawn [a]
-  (traxis/send a))
+  (traxis/send-traxis a))

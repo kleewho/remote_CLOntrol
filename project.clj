@@ -10,6 +10,7 @@
                  [clj-http "1.0.1"]
                  [clj-time "0.9.0"]
                  [environ "1.0.0"]
+                 [cats "0.3.2"]
                  [org.clojure/data.json "0.2.5"]
                  [org.clojure/algo.monads "0.1.5"]
                  [org.clojure/tools.logging "0.3.1"]
