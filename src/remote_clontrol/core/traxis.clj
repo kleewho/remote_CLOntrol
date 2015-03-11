@@ -15,6 +15,12 @@
   (let [message (clojure.string/lower-case (.getMessage e))]
     (.contains message "already recorded")))
 
+
+(defn get-recording-id [traxis-client identity imi]
+  (let [recordingId (.recordingId traxis-client identity imi)]
+    (if (.isPresent recordingId)
+      (.get recordingId))))
+
 (defmulti handle-error is-already-recorded?)
 
 (defmethod handle-error true [e traxis-client identity imi]
@@ -28,11 +34,13 @@
   (log/error "Exception when sending booking to traxis " identity imi)
   (throw e))
 
-(defn send-traxisxo [{:keys [region customer crid imi]}]
+(defn interpret-traxis-error [traxis-client identity imi]
+  (fn [e]
+    (handle-error e traxis-client identity imi)))
+
+(defn send-traxis [{:keys [region customer crid imi]}]
   (let [identity (RecordableIdentity/customerId customer)
         resource (RecordableResource/eventByCridAndImi crid imi)
         traxis-client (region traxis-clients)]
-    (try
-      (.sendBookingRequest traxis-client identity resource)
-      (catch TraxisException e
-        (handle-error e)))))
+    (exc/try-or-recover (.sendBookingRequest traxis-client identity resource)
+                        (interpret-traxis-error traxis-client identity imi))))
