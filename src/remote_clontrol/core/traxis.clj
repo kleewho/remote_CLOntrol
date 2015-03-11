@@ -11,7 +11,7 @@
                               (FusedRequestConfig/defaultFusedConfig)
                               "http://api.lgi.com/sg/traxis-pl")})
 
-(defn is-already-recorded? [e _ _ _]
+(defn already-recorded? [e _ _ _]
   (let [message (clojure.string/lower-case (.getMessage e))]
     (.contains message "already recorded")))
 
@@ -21,7 +21,7 @@
     (if (.isPresent recordingId)
       (.get recordingId))))
 
-(defmulti handle-error is-already-recorded?)
+(defmulti handle-error already-recorded?)
 
 (defmethod handle-error true [e traxis-client identity imi]
   (log/info "Booking is already recorded " identity imi)
